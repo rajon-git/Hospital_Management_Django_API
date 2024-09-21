@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Doctor, Specialization, Designation, AvailableTime
-from .serializers import DoctorSerializer, SpecializationSerializer, DesignationSerializer, AvailableTimeSerializer
+from .models import Doctor, Specialization, Designation, AvailableTime, Review
+from .serializers import DoctorSerializer, SpecializationSerializer, DesignationSerializer, AvailableTimeSerializer, ReviewSerializer
 
 # Create your views here.
 class DoctorViewSet(viewsets.ModelViewSet):
@@ -19,3 +19,7 @@ class DesignationViewSet(viewsets.ModelViewSet):
 class AvailableTimeViewSet(viewsets.ModelViewSet):
     queryset = AvailableTime.objects.all()
     serializer_class = AvailableTimeSerializer
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
