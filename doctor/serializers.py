@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Doctor,Specialization, Designation
+from .models import Doctor,Specialization, Designation, AvailableTime
 
 class DoctorSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(many=False)
@@ -15,4 +15,9 @@ class SpecializationSerializer(serializers.ModelSerializer):
 class DesignationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Designation
+        fields = '__all__'
+
+class AvailableTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailableTime
         fields = '__all__'
