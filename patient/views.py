@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login, logout
 from rest_framework.authtoken.models import Token
 
 # for sending email
@@ -73,3 +73,9 @@ class UserLoginApiView(APIView):
             else:
                 return Response({'error' : "Invalid Credential"})
         return Response(serializer.errors)
+    
+class UserLogoutApiView(APIView):
+    def get(self, request):
+        request.user.auth_token.delete()
+        logout(request)
+        return redirect('login')
