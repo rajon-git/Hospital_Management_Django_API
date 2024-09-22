@@ -6,5 +6,6 @@ router = DefaultRouter()
 router.register('list', views.PatientViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('register/', views.UserRegistrationApiView.as_view(), name='register')
 ]
