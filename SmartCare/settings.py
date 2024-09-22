@@ -40,6 +40,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://hospital-management-qu7q.onrender.com']
+
 ROOT_URLCONF = 'SmartCare.urls'
 
 TEMPLATES = [
