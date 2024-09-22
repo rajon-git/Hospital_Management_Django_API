@@ -41,6 +41,7 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://hospital-management-qu7q.onrender.com']
+CSRF_COOKIE_SECURE = True
 
 ROOT_URLCONF = 'SmartCare.urls'
 
