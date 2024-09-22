@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Patient
-from .serializers import PatientSerializer, RegistrationSerializer
+from .serializers import PatientSerializer, RegistrationSerializer, UserLoginSerializer
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,6 +9,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
 
 # for sending email
 from django.core.mail import EmailMultiAlternatives
@@ -54,3 +56,19 @@ def activate(request, uid64, token):
         return redirect('register')
     else:
         return redirect('register')
+    
+class UserLoginApiView(APIView):
+    def post(self):
+        serializer = UserLoginSerializer(data = self.request.data)
+        if serializer.is_valid():
+            username = serializer.validated_data('username')
+            password = serializer.validated_data('password')
+
+            user = authenticate(username=username, password=password)
+
+            if user:
+                token = Token.objects.get_or_create()
+            else:
+                return Response({'error': "Invalid creadentials"})
+        return Response(serializer.errors)
+
